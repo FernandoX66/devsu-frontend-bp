@@ -1,3 +1,76 @@
-h2 {
-  text-align: center;
+@use 'colors' as *;
+
+section {
+  background-color: $white;
+
+  h2 {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid $gray;
+  }
+
+  form {
+    display: grid;
+    grid-gap: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 20px 40px 20px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+
+    fieldset {
+      border: none;
+      position: relative;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        border-radius: 5px;
+        border: 1px solid $dark-gray;
+        font: {
+          family: inherit;
+          size: 1rem;
+        }
+        outline: none;
+        padding: 10px;
+        width: 100%;
+
+        &:focus {
+          border: 1px solid $blue;
+        }
+
+        &.invalid {
+          border-color: $error;
+        }
+
+        &:disabled {
+          background-color: $light-gray;
+          color: $dark-gray;
+          border-color: $gray;
+        }
+      }
+
+      .form-errors p {
+        color: $error;
+        font-size: 0.8rem;
+        position: absolute;
+        bottom: -18px;
+      }
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    padding: 0 20px 20px 20px;
+  }
 }

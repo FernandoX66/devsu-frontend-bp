@@ -1,1 +1,104 @@
-<h2>Formulario de registro</h2>
+<section>
+  <h2>Formulario de Registro</h2>
+  <hr />
+
+  <form [formGroup]="form">
+    <fieldset>
+      <label for="id">ID</label>
+      <input
+        formControlName="id"
+        [class.invalid]="isControlInvalid('id')"
+        type="text"
+        id="id"
+        name="id"
+        maxlength="10"
+      />
+      <div class="form-errors" *ngIf="isControlInvalid('id')">
+        <p *ngIf="getControl('id').hasError('required')">Este campo es requerido!</p>
+        <p *ngIf="getControl('id').hasError('minlength')">Debes ingresar al menos 3 caracteres!</p>
+        <p *ngIf="getControl('id').hasError('maxlength')">Máximo 10 caracteres!</p>
+        <p *ngIf="getControl('id').hasError('exists')">ID no disponible!</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label for="name">Nombre</label>
+      <input
+        formControlName="name"
+        [class.invalid]="isControlInvalid('name')"
+        type="text"
+        id="name"
+        name="name"
+        maxlength="100"
+      />
+      <div class="form-errors" *ngIf="isControlInvalid('name')">
+        <p *ngIf="getControl('name').hasError('required')">Este campo es requerido!</p>
+        <p *ngIf="getControl('name').hasError('minlength')">
+          Debes ingresar al menos 5 caracteres!
+        </p>
+        <p *ngIf="getControl('name').hasError('maxlength')">Máximo 100 caracteres!</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label for="description">Descripción</label>
+      <input
+        formControlName="description"
+        [class.invalid]="isControlInvalid('description')"
+        type="text"
+        id="description"
+        name="description"
+        maxlength="200"
+      />
+      <div class="form-errors" *ngIf="isControlInvalid('description')">
+        <p *ngIf="getControl('description').hasError('required')">Este campo es requerido!</p>
+        <p *ngIf="getControl('description').hasError('minlength')">
+          Debes ingresar al menos 10 caracteres!
+        </p>
+        <p *ngIf="getControl('description').hasError('maxlength')">Máximo 200 caracteres!</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label for="logo">Logo</label>
+      <input
+        formControlName="logo"
+        [class.invalid]="isControlInvalid('logo')"
+        type="text"
+        id="logo"
+        name="logo"
+      />
+      <div class="form-errors" *ngIf="isControlInvalid('logo')">
+        <p *ngIf="getControl('logo').hasError('required')">Este campo es requerido!</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label for="dateRelease">Fecha Liberación</label>
+      <input
+        formControlName="date_release"
+        [class.invalid]="isControlInvalid('date_release')"
+        type="date"
+        id="dateRelease"
+        name="dateRelease"
+        [min]="formattedCurrentDate"
+      />
+      <div class="form-errors" *ngIf="isControlInvalid('date_release')">
+        <p *ngIf="getControl('date_release').hasError('required')">Este campo es requerido!</p>
+        <p *ngIf="getControl('date_release').hasError('beforeDate')">
+          La fecha no puede ser menor a la actual!
+        </p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label for="dateRevision">Fecha Revisión</label>
+      <input formControlName="date_revision" type="date" id="dateRevision" name="dateRevision" />
+    </fieldset>
+  </form>
+
+  <div class="form-buttons">
+    <app-button width="100px" color="secondary" (click)="form.reset()">Reiniciar</app-button>
+    <app-button width="100px" [disabled]="form.invalid" (click)="submitForm()">Enviar</app-button>
+  </div>
+</section>

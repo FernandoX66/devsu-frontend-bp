@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { ProductsTableComponent } from '../../ui/products-table/products-table.component';
 import { RouterLink } from '@angular/router';
-import { ProductsFacade } from '../../domain/products-facade.service';
+import { ProductsFacade } from '../../domain/services/products-facade.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Product } from '../../data-access/models/product.model';
 
@@ -27,5 +27,9 @@ export class ProductsListComponent implements OnInit {
     this.perPage = this.productsFacade.perPage;
     this.searchControl = this.productsFacade.searchControl;
     this.paginationControl = this.productsFacade.paginationControl;
+  }
+
+  onDeleteProduct(id: Product['id']): void {
+    this.productsFacade.deleteOneProduct(id);
   }
 }

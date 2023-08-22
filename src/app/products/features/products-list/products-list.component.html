@@ -4,7 +4,10 @@
     <app-button width="100px" color="primary" routerLink="/create">Agregar</app-button>
   </div>
   <div class="table-container">
-    <app-products-table [products]="products()"></app-products-table>
+    <app-products-table
+      [products]="products()"
+      (deleteProduct)="onDeleteProduct($event)"
+    ></app-products-table>
     <div class="table-actions">
       <p>
         {{
@@ -14,9 +17,9 @@
       </p>
       <select [value]="perPage()" [formControl]="paginationControl">
         <option value="1">1</option>
-        <option value="2">2</option>
         <option value="3">3</option>
-        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
       </select>
     </div>
   </div>

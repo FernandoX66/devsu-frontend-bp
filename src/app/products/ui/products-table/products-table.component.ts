@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../../data-access/models/product.model';
@@ -14,4 +14,6 @@ import { ContextualMenuComponent } from '../contextual-menu/contextual-menu.comp
 })
 export class ProductsTableComponent {
   @Input() products: Product[] = [];
+
+  @Output() deleteProduct = new EventEmitter<Product['id']>();
 }

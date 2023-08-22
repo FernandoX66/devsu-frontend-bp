@@ -9,7 +9,7 @@
     *ngIf="showMenu"
   >
     <div class="contextual-menu-option" [routerLink]="['/', id]">Editar</div>
-    <div class="contextual-menu-option">Eliminar</div>
+    <div class="contextual-menu-option" (click)="deleteProduct.emit(id)">Eliminar</div>
     <div class="backdrop" (click)="toggleMenu()"></div>
   </div>
 </div>

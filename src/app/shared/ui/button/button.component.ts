@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, booleanAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonColor } from './button.types';
+import { ButtonColor, ButtonType } from './button.types';
 
 @Component({
   selector: 'app-button',
@@ -13,4 +13,6 @@ import { ButtonColor } from './button.types';
 export class ButtonComponent {
   @Input() color: ButtonColor = 'primary';
   @Input() width = 'auto';
+  @Input() type: ButtonType = 'button';
+  @Input({ transform: booleanAttribute }) disabled = false;
 }

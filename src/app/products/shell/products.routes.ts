@@ -4,16 +4,16 @@ import { ProductsFormComponent } from '../features/products-form/products-form.c
 
 const productsRoutes: Routes = [
   {
-    path: ':id',
-    component: ProductsFormComponent,
-  },
-  {
     path: '',
     component: ProductsListComponent,
     pathMatch: 'full',
   },
   {
     path: 'create',
+    component: ProductsFormComponent,
+  },
+  {
+    path: ':id',
     component: ProductsFormComponent,
   },
   {

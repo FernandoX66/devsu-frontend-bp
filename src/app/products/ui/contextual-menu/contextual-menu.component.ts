@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Product } from '../../data-access/models/product.model';
 
 @Component({
   selector: 'app-contextual-menu',
@@ -13,6 +14,8 @@ import { RouterLink } from '@angular/router';
 export class ContextualMenuComponent {
   @Input({ required: true }) isLast!: boolean;
   @Input({ required: true }) id!: string;
+
+  @Output() deleteProduct = new EventEmitter<Product['id']>();
 
   showMenu = false;
 

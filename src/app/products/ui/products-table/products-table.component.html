@@ -18,7 +18,13 @@
           <td>{{ product.description }}</td>
           <td>{{ product.date_release | date: 'd/MM/YYYY' }}</td>
           <td>{{ product.date_revision | date: 'd/MM/YYYY' }}</td>
-          <td><app-contextual-menu [id]="product.id" [isLast]="isLast"></app-contextual-menu></td>
+          <td>
+            <app-contextual-menu
+              [id]="product.id"
+              [isLast]="isLast"
+              (deleteProduct)="deleteProduct.emit($event)"
+            ></app-contextual-menu>
+          </td>
         </tr>
       </tbody>
     </table>
