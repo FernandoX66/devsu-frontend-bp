@@ -3,7 +3,6 @@
 section {
   .table {
     overflow-x: auto;
-    overflow-y: visible;
 
     table {
       border-collapse: collapse;
@@ -24,6 +23,12 @@ section {
 
       tbody {
         color: $black;
+
+        &::after {
+          content: '';
+          display: block;
+          height: 8px;
+        }
 
         td {
           border-bottom: 1px solid $gray;

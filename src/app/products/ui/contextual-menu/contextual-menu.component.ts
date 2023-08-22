@@ -16,7 +16,7 @@ export class ContextualMenuComponent {
 
   showMenu = false;
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.showMenu = !this.showMenu;
   }
 }
