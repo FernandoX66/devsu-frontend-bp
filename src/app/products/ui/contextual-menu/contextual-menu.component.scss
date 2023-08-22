@@ -1,0 +1,55 @@
+@use 'colors' as *;
+
+.contextual-menu {
+  position: relative;
+
+  button {
+    border-radius: 50%;
+    border: none;
+    height: 28px;
+    width: 28px;
+    color: $blue;
+    font-size: 0.9rem;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $light-blue;
+    }
+  }
+
+  .contextual-menu-options {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    background-color: $white;
+    border: 1px solid $gray;
+    border-radius: 3px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .contextual-menu-option {
+      z-index: 2;
+      padding: 10px;
+      border-bottom: 1px solid $gray;
+
+      &:nth-child(2) {
+        border-bottom: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $light-blue;
+      }
+    }
+
+    .backdrop {
+      z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: transparent;
+    }
+  }
+}

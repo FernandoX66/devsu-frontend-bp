@@ -1,0 +1,28 @@
+@use 'colors' as *;
+
+button {
+  border: none;
+  color: $blue;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 15px;
+  font-weight: bold;
+  border-radius: 3px;
+  transition: background-color 0.1s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.primary {
+    background-color: $yellow;
+
+    &:hover {
+      background-color: $light-yellow;
+    }
+  }
+
+  &.secondary {
+    background-color: $gray;
+  }
+}

@@ -1,0 +1,41 @@
+@use 'colors' as *;
+
+section {
+  .table {
+    overflow-x: auto;
+    overflow-y: visible;
+
+    table {
+      border-collapse: collapse;
+      color: $blue;
+      width: 100%;
+      overflow-x: auto;
+
+      thead {
+        background-color: $light-blue;
+
+        th {
+          border-bottom: 1px solid $gray;
+          font-weight: 600;
+          padding: 10px;
+          text-align: center;
+        }
+      }
+
+      tbody {
+        color: $black;
+
+        td {
+          border-bottom: 1px solid $gray;
+          padding: 10px;
+          text-align: center;
+
+          img {
+            max-width: 80px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

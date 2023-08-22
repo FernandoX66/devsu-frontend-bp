@@ -31,9 +31,9 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss", "src/scss/_fonts.scss"],
+            "styles": ["src/styles.scss", "src/scss/_fonts.scss", "remixicon/fonts/remixicon.css"],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": ["src/scss"]
             },
             "scripts": []
           },
@@ -59,7 +59,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -91,7 +97,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": ["src/scss"]
             },
             "scripts": []
           }

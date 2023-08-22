@@ -1,0 +1,26 @@
+<section>
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto</th>
+          <th>Descripción</th>
+          <th>Fecha de liberación</th>
+          <th>Fecha de reestructuración</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; last as isLast">
+          <td class="image-cell"><img [src]="product.logo" [alt]="product.name + ' logo'" /></td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.date_release | date: 'd/MM/YYYY' }}</td>
+          <td>{{ product.date_revision | date: 'd/MM/YYYY' }}</td>
+          <td><app-contextual-menu [id]="product.id" [isLast]="isLast"></app-contextual-menu></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

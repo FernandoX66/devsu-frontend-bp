@@ -1,0 +1,17 @@
+@use 'colors' as *;
+
+header {
+  background-color: $white;
+  height: auto;
+  padding: 20px;
+
+  img {
+    width: 100%;
+    max-width: 160px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+}

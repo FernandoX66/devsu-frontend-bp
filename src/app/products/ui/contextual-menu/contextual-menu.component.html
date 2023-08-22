@@ -1,0 +1,15 @@
+<div class="contextual-menu">
+  <button (click)="toggleMenu()">
+    <i class="ri-more-2-fill"></i>
+  </button>
+
+  <div
+    class="contextual-menu-options"
+    [ngStyle]="{ top: isLast ? 'unset' : '0', bottom: isLast ? '0' : 'unset' }"
+    *ngIf="showMenu"
+  >
+    <div class="contextual-menu-option" [routerLink]="['/', id]">Editar</div>
+    <div class="contextual-menu-option">Eliminar</div>
+    <div class="backdrop" (click)="toggleMenu()"></div>
+  </div>
+</div>
