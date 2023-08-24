@@ -2,7 +2,7 @@ import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { ProductsFacade } from './products-facade.service';
 import { ProductsService } from '../../data-access/services/products.service';
-import { mockProduct, mockProducts } from '../../test/mocks';
+import { mockProduct, mockProducts } from '../../../test/mocks';
 import { of } from 'rxjs';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -58,7 +58,7 @@ describe('ProductsFacadeService', () => {
     service.productsPerPage = 1;
     service.paginationControl.setValue('2');
 
-    expect(service.paginatedProducts().length).toBe(1);
+    expect(service.paginatedProducts()).toEqual([mockProducts[1]]);
   });
 
   it('should create a product and update the state', () => {

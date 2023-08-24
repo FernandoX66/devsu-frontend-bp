@@ -14,13 +14,14 @@ import { DateFacade } from '../../domain/facades/date-facade.service';
 import { CustomValidators } from '../../domain/validators/custom-validators';
 import { ProductsFacade } from '../../domain/facades/products-facade.service';
 import { Product } from '../../data-access/models/product.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-form',
   standalone: true,
   templateUrl: './products-form.component.html',
   styleUrls: ['./products-form.component.scss'],
-  imports: [CommonModule, ButtonComponent, ReactiveFormsModule],
+  imports: [CommonModule, ButtonComponent, ReactiveFormsModule, RouterLink],
 })
 export class ProductsFormComponent implements OnInit {
   private readonly fb = inject(NonNullableFormBuilder);

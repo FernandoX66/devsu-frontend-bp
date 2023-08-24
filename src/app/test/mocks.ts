@@ -1,4 +1,4 @@
-import { Product } from '../data-access/models/product.model';
+import { Product } from '../products/data-access/models/product.model';
 
 export const mockProducts: Product[] = [
   {

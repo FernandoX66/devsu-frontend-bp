@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DateFacade } from '../../domain/facades/date-facade.service';
 import { signal } from '@angular/core';
 import { of } from 'rxjs';
-import { mockProduct, mockProductFormValue } from '../../test/mocks';
+import { mockProduct, mockProductFormValue } from '../../../test/mocks';
 
 const createDateFacadeSpy = () => {
   return jasmine.createSpyObj('DateFacade', {

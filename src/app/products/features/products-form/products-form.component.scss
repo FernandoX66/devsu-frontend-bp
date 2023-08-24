@@ -1,5 +1,16 @@
 @use 'colors' as *;
 
+a {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: $blue;
+
+  &:hover {
+    color: $blue-hover;
+  }
+}
+
 section {
   background-color: $white;
 

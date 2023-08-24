@@ -18,6 +18,45 @@ section {
           font-weight: 600;
           padding: 10px;
           text-align: center;
+          word-wrap: break-word;
+
+          span {
+            white-space: break-spaces;
+          }
+
+          .tooltip {
+            position: relative;
+            display: inline-block;
+
+            i {
+              color: $dark-gray;
+              font-size: 1.1rem;
+              font-weight: 300;
+              margin-left: 3px;
+            }
+
+            .tooltiptext {
+              background-color: $dark-gray;
+              border-radius: 3px;
+              box-shadow: rgba(98, 103, 108, 0.2) 0px 8px 24px;
+              color: $white;
+              font: {
+                weight: 400;
+                size: 0.8rem;
+              }
+              padding: 5px 8px;
+              position: absolute;
+              visibility: hidden;
+              width: fit-content;
+              z-index: 1;
+            }
+
+            &:hover {
+              .tooltiptext {
+                visibility: visible;
+              }
+            }
+          }
         }
       }
 
