@@ -4,6 +4,12 @@ import { ProductsFacade } from './products-facade.service';
 import { ProductsService } from '../../data-access/services/products.service';
 import { mockProduct, mockProducts } from '../../test/mocks';
 import { of } from 'rxjs';
+import { Component, inject } from '@angular/core';
+
+@Component({ selector: 'app-component-stub', template: '', providers: [ProductsFacade] })
+class ComponentStub {
+  private readonly productsFacade = inject(ProductsFacade);
+}
 
 describe('ProductsFacadeService', () => {
   let service: ProductsFacade;
@@ -18,6 +24,7 @@ describe('ProductsFacadeService', () => {
     });
 
     TestBed.configureTestingModule({
+      declarations: [ComponentStub],
       providers: [{ provide: ProductsService, useValue: productsServiceSpy }, ProductsFacade],
     });
 
@@ -82,5 +89,15 @@ describe('ProductsFacadeService', () => {
     service.setEditProductId(null);
 
     expect(service.editProduct()).toBeNull();
+  });
+
+  it('should redirect the user to home if the product to edit is undefined', () => {
+    const fixture = TestBed.createComponent(ComponentStub);
+    const navigateSpy = spyOn(service['router'], 'navigateByUrl');
+    service.setEditProductId('invalid-id');
+
+    fixture.detectChanges();
+
+    expect(navigateSpy).toHaveBeenCalledWith('/');
   });
 });

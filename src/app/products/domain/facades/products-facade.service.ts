@@ -1,10 +1,11 @@
-import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
+import { DestroyRef, Injectable, computed, effect, inject, signal } from '@angular/core';
 import { ProductsService } from '../../data-access/services/products.service';
 import { ProductsState } from '../state/state.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Product } from '../../data-access/models/product.model';
+import { Router } from '@angular/router';
 
 const initialState: Readonly<ProductsState> = {
   products: [],
@@ -17,6 +18,7 @@ const initialState: Readonly<ProductsState> = {
 export class ProductsFacade {
   private readonly productsService = inject(ProductsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
   private stateSignal = signal<ProductsState>(initialState);
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly paginationControl = new FormControl(this.stateSignal().perPage, { nonNullable: true });
@@ -41,7 +43,7 @@ export class ProductsFacade {
 
   constructor() {
     this.getAllProducts$.pipe(takeUntilDestroyed()).subscribe((products) => {
-      this.stateSignal.update((state) => ({ ...state, products }));
+      this.stateSignal.update((state) => ({ ...state, products, loading: false }));
     });
 
     this.searchControl.valueChanges
@@ -51,6 +53,12 @@ export class ProductsFacade {
     this.paginationControl.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((perPage) => this.stateSignal.update((state) => ({ ...state, perPage })));
+
+    effect(() => {
+      if (this.editProduct() === undefined) {
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 
   createOneProduct(product: Product): void {
