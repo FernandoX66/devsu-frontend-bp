@@ -10,9 +10,9 @@ import {
 import { CustomAsyncValidators } from '../../validators/custom-async-validators';
 import { ProductsService } from '../../data-access/services/products.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DateFacade } from '../../domain/services/date-facade.service';
+import { DateFacade } from '../../domain/facades/date-facade.service';
 import { CustomValidators } from '../../validators/custom-validators';
-import { ProductsFacade } from '../../domain/services/products-facade.service';
+import { ProductsFacade } from '../../domain/facades/products-facade.service';
 import { Product } from '../../data-access/models/product.model';
 
 @Component({

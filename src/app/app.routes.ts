@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProductsService } from './products/data-access/services/products.service';
-import { ProductsFacade } from './products/domain/services/products-facade.service';
-import { DateFacade } from './products/domain/services/date-facade.service';
+import { ProductsFacade } from './products/domain/facades/products-facade.service';
+import { DateFacade } from './products/domain/facades/date-facade.service';
 
 export const routes: Routes = [
   {
