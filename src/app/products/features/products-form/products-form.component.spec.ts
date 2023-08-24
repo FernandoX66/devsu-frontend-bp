@@ -3,8 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductsFormComponent } from './products-form.component';
 import { ProductsService } from '../../data-access/services/products.service';
 import { ProductsFacade } from '../../domain/facades/products-facade.service';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateFacade } from '../../domain/facades/date-facade.service';
 import { signal } from '@angular/core';
@@ -35,6 +33,7 @@ describe('ProductsFormComponent', () => {
         ['createOneProduct', 'updateOneProduct', 'setEditProductId'],
         {
           editProduct: signal({ ...mockProduct }),
+          loading: signal(false),
         }
       );
 
@@ -71,6 +70,14 @@ describe('ProductsFormComponent', () => {
       expect(productsFacadeSpy.updateOneProduct).toHaveBeenCalled();
       expect(dateFacadeSpy.addDays).not.toHaveBeenCalled();
     });
+
+    it('should reset the form with the values from the product', () => {
+      component.getControl('name').setValue('test-name-3(updated)');
+
+      component.resetForm();
+
+      expect(component.getControl('name').value).toBe(mockProduct.name);
+    });
   });
 
   describe('when there is no product to edit', () => {
@@ -80,6 +87,7 @@ describe('ProductsFormComponent', () => {
         ['createOneProduct', 'updateOneProduct', 'setEditProductId'],
         {
           editProduct: signal(null),
+          loading: signal(false),
         }
       );
 
@@ -126,6 +134,14 @@ describe('ProductsFormComponent', () => {
 
       expect(productsFacadeSpy.createOneProduct).toHaveBeenCalled();
       expect(dateFacadeSpy.addDays).toHaveBeenCalled();
+    });
+
+    it('should reset the form', () => {
+      component.getControl('name').setValue('test-value');
+
+      component.resetForm();
+
+      expect(component.getControl('name').value).toBe('');
     });
   });
 });

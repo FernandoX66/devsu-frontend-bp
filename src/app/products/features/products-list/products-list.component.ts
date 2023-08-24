@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { ProductsTableComponent } from '../../ui/products-table/products-table.component';
@@ -17,10 +17,14 @@ import { Product } from '../../data-access/models/product.model';
 export class ProductsListComponent {
   private readonly productsFacade = inject(ProductsFacade);
 
-  products = this.productsFacade.filteredProducts;
-  perPage = this.productsFacade.perPage;
-  searchControl = this.productsFacade.searchControl;
   paginationControl = this.productsFacade.paginationControl;
+  searchControl = this.productsFacade.searchControl;
+  products = this.productsFacade.paginatedProducts;
+  totalProducts = this.productsFacade.totalProducts;
+  pages = computed(() =>
+    new Array(this.productsFacade.totalPages()).fill(null).map((_, i) => i + 1)
+  );
+  currentPage = this.productsFacade.currentPage;
 
   onDeleteProduct(id: Product['id']): void {
     this.productsFacade.deleteOneProduct(id);

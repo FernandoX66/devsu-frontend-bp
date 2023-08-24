@@ -1,7 +1,7 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
-import { DateFacade } from '../domain/facades/date-facade.service';
+import { DateFacade } from '../facades/date-facade.service';
 
 class DateFacadeStub {
   private result = false;

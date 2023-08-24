@@ -14,10 +14,12 @@ describe('ProductsListComponent', () => {
 
   beforeEach(() => {
     productsFacadeSpy = jasmine.createSpyObj('ProductsFacade', ['deleteOneProduct'], {
-      filteredProducts: signal([]),
-      perPage: signal(0),
-      searchControl: new FormControl(''),
       paginationControl: new FormControl(0),
+      searchControl: new FormControl(''),
+      paginatedProducts: signal([]),
+      totalProducts: signal(0),
+      totalPages: signal(1),
+      currentPage: signal(1),
     });
 
     TestBed.configureTestingModule({
@@ -39,9 +41,11 @@ describe('ProductsListComponent', () => {
 
   it('should initialize properties', () => {
     expect(component.products()).toEqual([]);
-    expect(component.perPage()).toBe(0);
     expect(component.searchControl).toBeTruthy();
     expect(component.paginationControl).toBeTruthy();
+    expect(component.totalProducts()).toBe(0);
+    expect(component.currentPage()).toBe(1);
+    expect(component.pages()).toEqual([1]);
   });
 
   it('should delete a product', () => {

@@ -98,7 +98,9 @@
   </form>
 
   <div class="form-buttons">
-    <app-button width="100px" color="secondary" (click)="form.reset()">Reiniciar</app-button>
-    <app-button width="100px" [disabled]="form.invalid" (click)="submitForm()">Enviar</app-button>
+    <app-button width="100px" color="secondary" (click)="resetForm()">Reiniciar</app-button>
+    <app-button width="100px" [disabled]="form.invalid || loading()" (click)="submitForm()"
+      >Enviar</app-button
+    >
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Signal, effect, inject } from '@angular/core';
+import { Component, Input, OnInit, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import {
@@ -7,11 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CustomAsyncValidators } from '../../validators/custom-async-validators';
+import { CustomAsyncValidators } from '../../domain/validators/custom-async-validators';
 import { ProductsService } from '../../data-access/services/products.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateFacade } from '../../domain/facades/date-facade.service';
-import { CustomValidators } from '../../validators/custom-validators';
+import { CustomValidators } from '../../domain/validators/custom-validators';
 import { ProductsFacade } from '../../domain/facades/products-facade.service';
 import { Product } from '../../data-access/models/product.model';
 
@@ -34,6 +34,7 @@ export class ProductsFormComponent implements OnInit {
   offset = this.currentDate.getTimezoneOffset();
   form = this.initializeForm();
   editProduct = this.productsFacade.editProduct;
+  loading = this.productsFacade.loading;
 
   constructor() {
     this.getControl('date_release')
@@ -64,6 +65,19 @@ export class ProductsFormComponent implements OnInit {
   isControlInvalid(controlName: string): boolean {
     const control = this.getControl(controlName);
     return control.invalid && control.touched;
+  }
+
+  resetForm(): void {
+    const editProduct = this.editProduct();
+    if (this.id && editProduct) {
+      this.form.reset({
+        ...editProduct,
+        date_release: this.dateFacade.formatDate(new Date(editProduct.date_release)),
+        date_revision: this.dateFacade.formatDate(new Date(editProduct.date_revision)),
+      });
+    } else {
+      this.form.reset();
+    }
   }
 
   submitForm(): void {

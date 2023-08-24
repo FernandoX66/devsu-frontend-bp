@@ -11,15 +11,13 @@
     <div class="table-actions">
       <p>
         {{
-          products().length
+          totalProducts()
             | i18nPlural: { '=0': 'Sin resultados', '=1': '# resultado', other: '# resultados' }
         }}
       </p>
-      <select [value]="perPage()" [formControl]="paginationControl">
-        <option value="1">1</option>
-        <option value="3">3</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
+
+      <select [formControl]="paginationControl">
+        <option *ngFor="let page of pages()" [value]="page">{{ page }}</option>
       </select>
     </div>
   </div>
