@@ -8,6 +8,8 @@ import { DateFacade } from '../../domain/facades/date-facade.service';
 import { signal } from '@angular/core';
 import { of } from 'rxjs';
 import { mockProduct, mockProductFormValue } from '../../../test/mocks';
+import { provideRouter } from '@angular/router';
+import { provideLocationMocks } from '@angular/common/testing';
 
 const createDateFacadeSpy = () => {
   return jasmine.createSpyObj('DateFacade', {
@@ -45,6 +47,8 @@ describe('ProductsFormComponent', () => {
           { provide: ProductsService, useValue: { checkExistence: () => of(false) } },
           { provide: ProductsFacade, useValue: productsFacadeSpy },
           { provide: DateFacade, useValue: dateFacadeSpy },
+          provideRouter([]),
+          provideLocationMocks(),
         ],
       });
       fixture = TestBed.createComponent(ProductsFormComponent);
@@ -99,6 +103,8 @@ describe('ProductsFormComponent', () => {
           { provide: ProductsService, useValue: { checkExistence: () => of(false) } },
           { provide: ProductsFacade, useValue: productsFacadeSpy },
           { provide: DateFacade, useValue: dateFacadeSpy },
+          provideRouter([]),
+          provideLocationMocks(),
         ],
       });
       fixture = TestBed.createComponent(ProductsFormComponent);
