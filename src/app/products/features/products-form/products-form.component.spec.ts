@@ -120,6 +120,12 @@ describe('ProductsFormComponent', () => {
       expect(dateFacadeSpy.formatDate).toHaveBeenCalledWith(new Date('2000-01-01:00:00:00'));
     });
 
+    it('should not assign values to the date_revision control when date_release changes if there is no value', () => {
+      component.getControl('date_release').setValue('');
+
+      expect(dateFacadeSpy.formatDate).toHaveBeenCalledTimes(3);
+    });
+
     it('should not submit the form if it is invalid', () => {
       component.submitForm();
 

@@ -40,7 +40,9 @@ export class ProductsFormComponent implements OnInit {
     this.getControl('date_release')
       .valueChanges.pipe(takeUntilDestroyed())
       .subscribe((releaseDate) => {
-        const selectedDate = this.dateFacade.addMinutes(new Date(`${releaseDate}`), this.offset);
+        if (!releaseDate) return;
+
+        const selectedDate = new Date(`${releaseDate}T00:00:00`);
         this.getControl('date_revision').setValue(
           this.dateFacade.formatDate(this.dateFacade.addYears(selectedDate, 1))
         );
@@ -83,34 +85,7 @@ export class ProductsFormComponent implements OnInit {
   submitForm(): void {
     if (this.form.invalid) return;
 
-    const product = {
-      ...this.form.getRawValue(),
-      date_release:
-        this.offset > 0
-          ? this.dateFacade.formatDate(
-              this.dateFacade.addDays(
-                this.dateFacade.addMinutes(
-                  new Date(this.getControl('date_release').value),
-                  this.offset
-                ),
-                1
-              )
-            )
-          : this.getControl('date_release').value,
-      date_revision:
-        this.offset > 0
-          ? this.dateFacade.formatDate(
-              this.dateFacade.addDays(
-                this.dateFacade.addMinutes(
-                  new Date(this.getControl('date_revision').value),
-                  this.offset
-                ),
-                1
-              )
-            )
-          : this.getControl('date_revision').value,
-    };
-
+    const product = this.handleTimezoneOffset();
     if (this.id) {
       this.productsFacade.updateOneProduct(product);
     } else {
@@ -158,5 +133,24 @@ export class ProductsFormComponent implements OnInit {
       date_revision: this.dateFacade.formatDate(new Date(product.date_revision)),
     });
     this.getControl('id').disable();
+  }
+
+  private handleTimezoneOffset() {
+    const dateReleaseValue: string = this.getControl('date_release').value;
+    const date_release =
+      this.offset > 0
+        ? this.dateFacade.formatDate(
+            this.dateFacade.addDays(new Date(`${dateReleaseValue}T00:00`), 1)
+          )
+        : dateReleaseValue;
+    const date_revision = this.dateFacade.formatDate(
+      this.dateFacade.addYears(new Date(`${date_release}T00:00`), 1)
+    );
+
+    return {
+      ...this.form.getRawValue(),
+      date_release,
+      date_revision,
+    };
   }
 }
